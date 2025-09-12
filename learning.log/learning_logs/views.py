@@ -40,7 +40,9 @@ def new_topic(request):
     else:
         form = TopicForm(request.POST)
         if form.is_valid():
-            form.save()
+            new_topic = form.save(commit=False)
+            new_topic.owner = request.user
+            new_topic.save()
             return HttpResponseRedirect(reverse('topics'))
     
     context = {'form': form}
@@ -48,7 +50,10 @@ def new_topic(request):
      
 @login_required    
 def new_entry(request, topic_id):
-    topic = Topic.filter(owner=request.user).objects.get(id=topic_id)
+    topic = Topic.objects.get(id=topic_id)
+
+    if topic.owner !=request.user:
+        raise Http404
 
     if request.method != 'POST':
         form = EntryForm()
@@ -65,8 +70,12 @@ def new_entry(request, topic_id):
 @login_required
 def edit_entry(request, entry_id):
     '''edita entradas'''
-    entry = Entry.filter(owner=request.user).objects.get(id=entry_id)
+    entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
+
+
+    if topic.owner !=request.user:
+        raise Http404
 
     if request.method != 'POST':
         form = EntryForm(instance=entry)
@@ -82,8 +91,11 @@ def edit_entry(request, entry_id):
 @login_required
 def delete_entry(request, entry_id):
     '''deleta entradas'''
-    entry = Entry.filter(owner=request.user).objects.get(id=entry_id)
+    entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
+
+    if topic.owner !=request.user:
+        raise Http404
 
     if request.method == 'POST':
         entry.delete()

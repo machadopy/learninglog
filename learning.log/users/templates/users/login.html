@@ -1,17 +1,29 @@
 {% extends 'learning_logs/base.html' %}
+{% load django_bootstrap5 %}
+
+<div>
+    {% block header %}
+        <h2>Entre com sua conta</h2>
+    {% endblock header %}
+</div>
+
 
 {% block content %}
 
 
 
-    <form action="{% url 'login' %}" method="post" >
-        {% csrf_token %}
-        {{ form.as_p }}        
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            
+            <form action="{% url 'login' %}" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button name="submit" class="form position-absolute top-50 start-50 translate-middle btn btn-primary">Entrar</button>
+                <input type="hidden" name="next" value="{% url 'index' %}"/>
+            </form>
+        </div>
 
-        <button name="submit">Entrar</button>
-        <input type="hidden" name="next" value="{% url 'index' %}"/>
-
-    </form>
+    </div>
 
 
 {% endblock content %}

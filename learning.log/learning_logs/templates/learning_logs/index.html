@@ -9,17 +9,26 @@
 
 {% extends 'Learning_logs/base.html' %}
 
+{% block header %}
+    <div class="mt-3">
+        <div class="p-5 bg-body-tertiary rounded-3">
+            <h1 class="display-5 fw-bold">Acompanhe seu Aprendizado</h1>
+        </div>
+    </div>
+{% endblock header %}
+
 
 {% block content %}
 
-    <h1>
-        Em breve serei o FUEL REQUEST
-    </h1>
+    <h4>
+        <p><a href="{% url 'register' %}">Registre-se</a> para organizar seu tópicos!</p>
+        
+    </h4>
 
 {% endblock content %}
 
     <footer>
-        machadopy®
+
     </footer>
 </body>
 </html>
