@@ -1,17 +1,54 @@
 {% extends 'learning_logs/base.html' %}
 
+{% load django_bootstrap5 %}
+
+{% block header %}
+
+<h1>
+    Criar Conta
+</h1>
+
+
+{% endblock header %}
+
+
 {% block content %}
 
 
 
-    <form action="{% url 'register' %}" method="post" >
-        {% csrf_token %}
-        {{ form.as_p }}        
 
-        <button name="submit">Registrar</button>
-        <input type="hidden" name="next" value="{% url 'index' %}"/>
+    <div class="row justify-content-center ">
+    
+        <div class="col-md-3 text-center">
+            <form action="{% url 'register' %}" method="post" class="ul-none form ">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button name="submit"class="btn btn-primary">Registrar</button>
+                <input type="hidden" name="next" value="{% url 'index' %}"/>
+            </form>
+        </div>
+    </div>
 
-    </form>
 
+    <div class="row justify-content-center ">
+    
+        <div class="col-md-3 text-center">
+ 
+{% if form.errors %}
+
+            <p>Máximo de 150 caracteres. <br></p>
+            <p>caracteres especiais @, ., +, -, _ são aceitos.<br></p>
+ 
+
+            <p>Não pode ser muito semelhante a outras informações pessoais.</p>
+            <p>Mínimo de 8 caracteres.</p>
+            <p>Não pode ser uma senha comumente usada.</p>
+            <p>Não pode ser totalmente numérica.</p>
+            <p> As senhas devem ser identicas.</p>
+
+        </div>
+    </div>
+
+{% endif %}
 
 {% endblock content %}

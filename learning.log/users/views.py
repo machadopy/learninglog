@@ -12,8 +12,12 @@ def logout_view(request):
 
 
 def register(request):
+
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('index'))
+
     if request.method != 'POST':
-        form = UserCreationForm
+        form = UserCreationForm()
     else:
         form = UserCreationForm(data=request.POST)
         if form.is_valid():

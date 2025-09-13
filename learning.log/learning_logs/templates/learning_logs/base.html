@@ -8,52 +8,161 @@
 
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+
+    <style>
+        .form-text{
+            display:none;
+        }
+        .ul-none ul{
+            display:none;
+        }
+
+    </style>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
+
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
+
+
         <div class="container-fluid">
-            <a class="navbar-brand"  href="{% url 'index' %}">Learning Logs</a>
+
+
+            <a class="navbar-brand"  href="{% url 'index' %}">
+                
+                Learning Logs
+
+            </a>
 
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
             aria-controls="navbarNav"
             aria-expanded="false"
             aria-label="Toggle navigation">
+
+
             <span class="navbar-toggler-icon"></span>
+
+
             </button>
 
 
-            </div>
+        </div>
         
-            <div class="collapsed navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse ms-4" id="navbarNav">
+
+
                 <ul class="navbar-nav">
+
+
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'topics' %}">Topicos</a></li>
+
+
+                        <a class="nav-link" href="{% url 'topics' %}">Topicos
+
+                        </a>
+
+
+                    </li>
+
+
                 </ul>
                 <ul class="navbar-nav">
+
+
                     {% if user.is_authenticated %}
+
+
                         <li class="nav-item">
-                            <a class="nav-link">Olá, {{user.username}}</a>
+
+
+                            <a class="nav-link text-nowrap">
+                                
+                                Olá, {{user.username}}
+
+
+                            </a>
+
+
                         </li>
+
+
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                            
+                            
+                            <a class="nav-link" href="{% url 'logout' %}">
+                                
+                                
+                                Sair
+
+
+                            </a>
                         </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Entrar</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registrar</a></li>
+                        <li class="nav-item">
+                            
+                            
+                            <a class="nav-link" href="{% url 'login' %}">
+                                
+                                Entrar
+
+                            </a>
+
+
+                        </li>
+
+
+                        <li class="nav-item">
+                            
+                            
+                            <a class="nav-link" href="{% url 'register' %}">
+                                
+                                
+                                Registrar
+
+
+                            </a>
+                        
+                        
+                        </li>
+
+
                     {% endif %}
                 </ul>
             </div>
     </nav>
 <div class="container">
-    <div>{% block header %}{% endblock header %}</div>
+
+
+    <div class="py-5 text-center mb-1">
+        
+
+        {% block header %}{% endblock header %}
+    
+        
+    </div>
+
+
+    <div class="border-top border-dark opacity-25 my-2"></div>
+
+
     <div>{% block content %}{% endblock content %}</div>
+
+
 </div>
+
+
 </body>
 
 <footer class="text-center p-3 bg-body-tertiary mt-auto">
 
+
     <div class="container-fluid">
+    
+    
         <p>Em breve serei o FUEL REQUEST - machadopy®</p>
+    
+    
     </div>
 
 </footer>

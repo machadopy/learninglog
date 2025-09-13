@@ -20,10 +20,22 @@
 
 {% block content %}
 
-    <h4>
-        <p><a href="{% url 'register' %}">Registre-se</a> para organizar seu tópicos!</p>
-        
-    </h4>
+    
+    {% if user.is_authenticated%}
+
+        <h4>
+            Adicione suas anotações em seus respectivos topicos
+        </h4>
+
+    {% else %}
+    
+        <h4>
+            <p><a href="{% url 'register' %}">Registre-se</a> para organizar seu tópicos!</p>           
+        </h4>
+        <h4>
+            Adicione suas anotações em seus respectivos topicos
+        </h4>
+    {% endif %}
 
 {% endblock content %}
 

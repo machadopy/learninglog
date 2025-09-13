@@ -1,28 +1,59 @@
 {% extends 'learning_logs/base.html'%}
 
+{% block header %}
+
+
+    <h1>{{topic}}</h1>
+
+
+{%endblock header%}
+
+
 {% block content %}
 
-    <p>Tópic {{ topic }}</p>
-    <p>Entradas</p>
-    <p>
-        <a href="{% url 'new_entry' topic.id %}">Adicionar nova entrada</a>
+        
+        <p>
+            <a href="{% url 'new_entry' topic.id %}"class="m-3">Adicionar nova entrada</a>
+        </p>
 
-    </p>
-
-
-    <ul>
         {% for entry in entries %}
-            <li>
-                <p>{{entry.date_added | date:'M d, Y H:i'}}</p>
-                <p>{{entry.text | linebreaks}}</p>
-                <p><a href="{% url 'edit_entry' entry.id %}">Editar anotação</a></p>
-                <p><a href="{% url 'delete_entry' entry.id %}">Deletar</a></p>
-            </li>
-        {% empty %}
-            <li>'Não há registros"'</li>
+            <div class="card m-3">
+            
+                <div class="card bg-secondary bg-opacity-25 ps-4">
 
+                    <h2 class="fs-4 text">
+
+
+                        {{entry.date_added | date:'M d, Y H:i'}}
+
+                            
+                        <a href="{% url 'edit_entry' entry.id %}">Editar anotação</a>
+                        
+
+                        <a href="{% url 'delete_entry' entry.id %}">Deletar</a>
+
+
+                    </h2>
+
+
+                </div>
+
+
+                <div class=" card  bg-opacity-25 ps-4">
+
+
+                    {{entry.text | linebreaks}}
+
+
+                </div>
+
+
+            </div>
+
+
+        {% empty %}
+            Não há registros
         {% endfor %}
-    </ul>
 
 
 
